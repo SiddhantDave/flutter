@@ -55,7 +55,7 @@ class GetToKnowYouScreen extends StatelessWidget {
                 height: 56,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Navigate to quiz
+                    Navigator.pushNamed(context, '/quiz');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
