@@ -30,29 +30,29 @@ class EventDetailsPage extends StatelessWidget {
                       Hero(
                         tag: event.title, // Using title as tag for uniqueness in this context
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(24),
+                          borderRadius: BorderRadius.circular(20),
                           child: Image.asset(
                             event.backgroundImage,
                             width: double.infinity,
-                            height: 250,
+                            height: 182,
                             fit: BoxFit.cover,
                           ),
                         ),
                       ),
                       if (event.tags.isNotEmpty)
                         Positioned(
-                          top: 16,
-                          left: 16,
+                          top: 10,
+                          left: 10,
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.8),
+                              color: Colors.white.withOpacity(0.9),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(
                               event.tags.first,
                               style: const TextStyle(
-                                fontSize: 12,
+                                fontSize: 11,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.black,
                               ),
@@ -61,69 +61,70 @@ class EventDetailsPage extends StatelessWidget {
                         ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 16),
                   // Price Tag
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
                       color: const Color(0xFF2D2D2D),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(6),
                     ),
                     child: const Text(
                       '₹2000/-',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 14,
+                        fontSize: 12,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 10),
                   // Title
                   Text(
                     event.title,
                     style: const TextStyle(
-                      fontSize: 28,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                       fontFamily: 'SF Pro Display',
-                      letterSpacing: -0.5,
+                      letterSpacing: -0.3,
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 10),
                   // Attendees
                   Row(
                     children: [
                       SizedBox(
-                        width: 60,
-                        height: 24,
+                        width: 52,
+                        height: 20,
                         child: Stack(
                           children: [
                             if (event.attendeeAvatars.isNotEmpty) _buildAvatar(event.attendeeAvatars[0], 0),
-                            if (event.attendeeAvatars.length > 1) _buildAvatar(event.attendeeAvatars[1], 16),
-                            if (event.attendeeAvatars.length > 2) _buildAvatar(event.attendeeAvatars[2], 32),
+                            if (event.attendeeAvatars.length > 1) _buildAvatar(event.attendeeAvatars[1], 14),
+                            if (event.attendeeAvatars.length > 2) _buildAvatar(event.attendeeAvatars[2], 28),
                           ],
                         ),
                       ),
+                      const SizedBox(width: 4),
                       Text(
                         '${event.attendeesCount}+ Attending',
                         style: const TextStyle(
-                          fontSize: 14,
+                          fontSize: 12,
                           fontWeight: FontWeight.w500,
                           color: Colors.black,
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 20),
                   // Date
                   _buildInfoRow(
                     icon: Icons.calendar_today_outlined,
-                    title: 'Sunday 1 June', // Placeholder as date parsing is not implemented
+                    title: 'Sunday 1 June',
                     subtitle: event.time,
                     isDate: true,
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 16),
                   // Location
                   _buildInfoRow(
                     icon: Icons.person_outline,
@@ -134,95 +135,120 @@ class EventDetailsPage extends StatelessWidget {
                   // Registration Card
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: AppColors.primaryLight,
+                      color: const Color(0xFFFFF8D5), // Body background
                       borderRadius: BorderRadius.circular(24),
                       border: Border.all(color: Colors.white, width: 2),
                     ),
+                    clipBehavior: Clip.hardEdge,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Registration',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF6A6A6A),
+                        // Header Strip
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                          color: AppColors.primaryLight,
+                          child: const Text(
+                            'Registration',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF6A6A6A),
+                            ),
                           ),
                         ),
-                        const SizedBox(height: 12),
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: AppColors.background,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Row(
+                        
+                        // Content Body
+                        Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Icon(Icons.gavel, size: 20, color: AppColors.primary),
-                              const SizedBox(width: 8),
+                              // Approval Required Row
+                              Row(
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFFFFADD), // Slightly lighter for icon bg
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: const Icon(Icons.how_to_reg, size: 20, color: AppColors.primary),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  const Text(
+                                    'Approval Required',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColors.primary,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 20),
+                              
+                              // Divider
+                              const Divider(height: 1, thickness: 1, color: Color(0xFFE5E5E5)),
+                              
+                              const SizedBox(height: 20),
+                              
+                              // Description
                               const Text(
-                                'Approval Required',
+                                'Welcome! To join the event, please register below it may take few days to complete your request. Thank You!',
                                 style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.primary,
+                                  fontSize: 16,
+                                  height: 1.4,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              const SizedBox(height: 24),
+                              
+                              // Button
+                              SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.primary, // Dark Green
+                                    foregroundColor: Colors.white,
+                                    padding: const EdgeInsets.symmetric(vertical: 16),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    elevation: 0,
+                                  ),
+                                  child: const Text(
+                                    'Request to Join',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          'Welcome! To join the event, please register below it may take few days to complete your request. Thank You!',
-                          style: TextStyle(
-                            fontSize: 14,
-                            height: 1.4,
-                            color: Colors.black,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primary,
-                              foregroundColor: AppColors.primaryLight,
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              elevation: 0,
-                            ),
-                            child: const Text(
-                              'Request to Join',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 20),
                   // About Event
                   const Text(
                     'About Event',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: Color(0xFF6A6A6A),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 10),
                   const Text(
                     'Kin is throwing a chill hangout this weekend good vibes.',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       height: 1.5,
                       color: Colors.black,
                     ),
@@ -299,8 +325,8 @@ class EventDetailsPage extends StatelessWidget {
     return Positioned(
       left: left,
       child: Container(
-        width: 24,
-        height: 24,
+        width: 20,
+        height: 20,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(color: Colors.white, width: 1.5),
@@ -326,9 +352,9 @@ class EventDetailsPage extends StatelessWidget {
           width: 48,
           height: 48,
           decoration: BoxDecoration(
-            color: AppColors.background,
+            color: Colors.transparent, // Transparent background
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFFE5E5E5)),
+            border: Border.all(color: const Color(0xFFE5E5E5), width: 1),
           ),
           child: isDate
               ? Column(
@@ -354,8 +380,9 @@ class EventDetailsPage extends StatelessWidget {
               title,
               style: const TextStyle(
                 fontSize: 16,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w700, // Bolder
                 color: Colors.black,
+                fontFamily: 'SF Pro Display',
               ),
             ),
             const SizedBox(height: 4),

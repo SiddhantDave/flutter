@@ -20,6 +20,9 @@ import 'screens/event_listing_page.dart';
 import 'screens/my_bookings_page.dart';
 import 'screens/profile/profile_screen.dart';
 import 'screens/profile/profile_details_screen.dart';
+import 'screens/ticket_screen.dart';
+import 'screens/peoples_page.dart';
+import 'screens/person_page.dart';
 import 'screens/onboarding/application_submitted_screen.dart';
 import 'screens/onboarding/profile_picture_upload_screen.dart';
 import 'screens/onboarding/welcome_screen.dart';
@@ -71,6 +74,12 @@ class MyApp extends StatelessWidget {
           '/profile': (context) => const ProfileScreen(),
           '/profile-details': (context) => const ProfileDetailsScreen(),
           '/my-bookings': (context) => const MyBookingsPage(),
+          '/ticket': (context) => const TicketScreen(),
+          '/peoples': (context) => const PeoplesPage(),
+          '/person': (context) {
+            final args = ModalRoute.of(context)?.settings.arguments as Map<String, String>?;
+            return PersonPage(personData: args);
+          },
           '/application-submitted': (context) => const ApplicationSubmittedScreen(),
           '/profile-picture-upload': (context) => const ProfilePictureUploadScreen(),
         };
