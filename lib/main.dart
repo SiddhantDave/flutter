@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'utils/theme.dart';
 import 'screens/dev_router_screen.dart';
 import 'screens/home_screen.dart';
@@ -12,11 +13,16 @@ import 'screens/onboarding/quiz_multiple_choice_screen.dart';
 import 'screens/onboarding/quiz_age_range_screen.dart';
 import 'screens/onboarding/quiz_activities_screen.dart';
 import 'screens/onboarding/quiz_conversation_screen.dart';
+import 'screens/onboarding/quiz_planning_screen.dart';
+import 'screens/onboarding/quiz_open_ended_screen.dart';
 import 'screens/event_details/event_details_page.dart';
 import 'screens/event_listing_page.dart';
 import 'screens/my_bookings_page.dart';
 import 'screens/profile/profile_screen.dart';
 import 'screens/profile/profile_details_screen.dart';
+import 'screens/onboarding/application_submitted_screen.dart';
+import 'screens/onboarding/profile_picture_upload_screen.dart';
+import 'screens/onboarding/welcome_screen.dart';
 
 import 'utils/events_data.dart';
 
@@ -55,15 +61,26 @@ class MyApp extends StatelessWidget {
           '/otp': (context) => const OtpScreen(),
           '/get-to-know-you': (context) => const GetToKnowYouScreen(),
           '/quiz': (context) => const QuizScreen(),
+          '/quiz-planning': (context) => const QuizPlanningScreen(),
           '/quiz-multiple-choice': (context) => const QuizMultipleChoiceScreen(),
           '/quiz-age-range': (context) => const QuizAgeRangeScreen(),
           '/quiz-activities': (context) => const QuizActivitiesScreen(),
+          '/quiz-open-ended': (context) => const QuizOpenEndedScreen(),
           '/quiz-conversation': (context) => const QuizConversationScreen(),
           '/event-listing': (context) => const EventListingPage(),
           '/profile': (context) => const ProfileScreen(),
           '/profile-details': (context) => const ProfileDetailsScreen(),
           '/my-bookings': (context) => const MyBookingsPage(),
+          '/application-submitted': (context) => const ApplicationSubmittedScreen(),
+          '/profile-picture-upload': (context) => const ProfilePictureUploadScreen(),
         };
+
+        if (settings.name == '/welcome') {
+          final args = settings.arguments as XFile?;
+          return MaterialPageRoute(
+            builder: (context) => WelcomeScreen(imageFile: args),
+          );
+        }
 
         final builder = routes[settings.name];
         if (builder != null) {

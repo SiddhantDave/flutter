@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
 import '../../utils/colors.dart';
 
-class QuizConversationScreen extends StatefulWidget {
-  const QuizConversationScreen({super.key});
+class QuizOpenEndedScreen extends StatefulWidget {
+  const QuizOpenEndedScreen({super.key});
 
   @override
-  State<QuizConversationScreen> createState() => _QuizConversationScreenState();
+  State<QuizOpenEndedScreen> createState() => _QuizOpenEndedScreenState();
 }
 
-class _QuizConversationScreenState extends State<QuizConversationScreen> {
-  int currentQuestion = 1;
-  int totalQuestions = 10;
-  Set<String> selectedTopics = {
-    'The unintended consequences of Gen AI are we ready for what\'s coming?',
-    'Personal growth through travel, books, and new experiences',
-  };
+class _QuizOpenEndedScreenState extends State<QuizOpenEndedScreen> {
+  // Assuming this is part of the flow, let's say it's 10% or we can make it configurable.
+  // The screenshot shows 10% completed.
+  double progress = 0.10;
+  final TextEditingController _controller = TextEditingController();
 
-  double get progress => currentQuestion / totalQuestions;
-
-  final List<String> topics = [
-    'The unintended consequences of Gen AI are we ready for what\'s coming?',
-    'Personal growth through travel, books, and new experiences',
-    'Finding balance between ambition & well-being',
-    'Rethinking social norms & modern relationships',
-  ];
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,108 +106,59 @@ class _QuizConversationScreenState extends State<QuizConversationScreen> {
               ],
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 40),
           // Question text
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Column(
-              children: [
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: const TextSpan(
-                    style: TextStyle(
-                      fontFamily: 'SF Pro Display',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xFF333333),
-                      height: 1.19,
-                    ),
-                    children: [
-                      TextSpan(text: 'A conversation '),
-                      TextSpan(
-                        text: 'I\'d',
-                        style: TextStyle(fontWeight: FontWeight.w700),
-                      ),
-                      TextSpan(text: ' love to join in on'),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 4),
-                const Text(
-                  '(select only 2 please)',
-                  style: TextStyle(
-                    fontFamily: 'SF Pro Display',
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xFF666666),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30),
+            child: Text(
+              'Anything else you\'d like potential connections to know?',
+              style: TextStyle(
+                fontFamily: 'SF Pro Display',
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFF333333),
+                height: 1.3,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
           const SizedBox(height: 24),
-          // Topic options
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Column(
-                  children: topics.map((topic) {
-                    final isSelected = selectedTopics.contains(topic);
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            if (isSelected) {
-                              selectedTopics.remove(topic);
-                            } else {
-                              if (selectedTopics.length < 2) {
-                                selectedTopics.add(topic);
-                              }
-                            }
-                          });
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 16,
-                          ),
-                          decoration: BoxDecoration(
-                            color: isSelected 
-                                ? AppColors.primary 
-                                : AppColors.white,
-                            borderRadius: BorderRadius.circular(28),
-                            border: Border.all(
-                              color: AppColors.primary,
-                              width: 1.5,
-                            ),
-                          ),
-                          child: Text(
-                            topic,
-                            style: TextStyle(
-                              fontFamily: 'SF Pro Display',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: isSelected
-                                  ? AppColors.white
-                                  : AppColors.primary,
-                              height: 1.3,
-                            ),
-                            textAlign: TextAlign.center,
-                            maxLines: 2,
-                            overflow: TextOverflow.visible,
-                          ),
-                        ),
-                      ),
-                    );
-                  }).toList(),
+          // Text Input
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              height: 150, // Fixed height as per screenshot look
+              decoration: BoxDecoration(
+                color: AppColors.background,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: AppColors.primary,
+                  width: 1,
+                ),
+              ),
+              child: TextField(
+                controller: _controller,
+                maxLines: null, // Allow multiline
+                expands: true,
+                style: const TextStyle(
+                  fontFamily: 'SF Pro Display',
+                  fontSize: 16,
+                  color: AppColors.primary,
+                ),
+                decoration: const InputDecoration(
+                  hintText: 'On Sundays I\'d love to....',
+                  hintStyle: TextStyle(
+                    color: Color(0xFF999999),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  contentPadding: EdgeInsets.all(16),
+                  border: InputBorder.none,
                 ),
               ),
             ),
           ),
+          const Spacer(),
           // Bottom buttons
           Padding(
             padding: const EdgeInsets.all(20),
@@ -240,8 +186,8 @@ class _QuizConversationScreenState extends State<QuizConversationScreen> {
                     height: 52,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Navigate to open ended question
-                        Navigator.pushNamed(context, '/quiz-open-ended');
+                        // Navigate to profile picture upload
+                        Navigator.pushNamed(context, '/profile-picture-upload');
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
@@ -252,7 +198,7 @@ class _QuizConversationScreenState extends State<QuizConversationScreen> {
                         ),
                       ),
                       child: const Text(
-                        'Next Question',
+                        'Submit',
                         style: TextStyle(
                           fontFamily: 'SF Pro Display',
                           fontSize: 16,
@@ -266,6 +212,7 @@ class _QuizConversationScreenState extends State<QuizConversationScreen> {
               ],
             ),
           ),
+          const SizedBox(height: 20), // Bottom padding
         ],
       ),
     );
