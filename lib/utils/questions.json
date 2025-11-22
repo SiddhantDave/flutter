@@ -1,0 +1,428 @@
+{
+  "quiz_meta": {
+    "title": "Kin Introduction Quiz",
+    "total_questions": 31,
+    "description": "Sequence derived from provided iPhone 13 & 14 screenshots."
+  },
+  "questions": [
+    {
+      "id": 1,
+      "sequence_order": 1,
+      "category": "text_input",
+      "type": "text_field",
+      "question": "My first name is",
+      "placeholder": "Janvi James",
+      "required": true
+    },
+    {
+      "id": 2,
+      "sequence_order": 2,
+      "category": "multiple_choice",
+      "type": "single_select",
+      "question": "I identify as",
+      "options": [
+        "Male",
+        "Female",
+        "Non-Binary",
+        "Prefer not to say"
+      ]
+    },
+    {
+      "id": 3,
+      "sequence_order": 3,
+      "category": "range",
+      "type": "scroll_picker",
+      "question": "I fall under the age range of",
+      "options": [
+        "18-24",
+        "25-34",
+        "35-40",
+        "41-46",
+        "47-52"
+      ],
+      "default_highlight": "35-40"
+    },
+    {
+      "id": 4,
+      "sequence_order": 4,
+      "category": "multiple_choice",
+      "type": "single_select",
+      "question": "I work in",
+      "options": [
+        "Arts and Entertainment",
+        "Business and Finance",
+        "Education",
+        "Healthcare",
+        "Prefer not to say"
+      ]
+    },
+    {
+      "id": 5,
+      "sequence_order": 5,
+      "category": "multiple_choice",
+      "type": "multi_select",
+      "question": "My ideal way of spending time with others includes: (Pick up to 2)",
+      "config": {
+        "max_selection": 2
+      },
+      "options": [
+        "Relaxing in a calming environment",
+        "Sharing a great meal and conversation",
+        "Moving our bodies and connecting through activity",
+        "Learning something new together"
+      ]
+    },
+    {
+      "id": 6,
+      "sequence_order": 6,
+      "category": "multiple_choice",
+      "type": "single_select",
+      "question": "I usually decide what’s good for my wellbeing with the help (pick one)",
+      "options": [
+        "Friends and family",
+        "My own research and intuition",
+        "Experts, social media and online communities"
+      ]
+    },
+    {
+      "id": 7,
+      "sequence_order": 7,
+      "category": "multiple_choice",
+      "type": "multi_select",
+      "question": "I describe myself as (tick all that apply)",
+      "config": {
+        "max_selection": null
+      },
+      "options": [
+        "A Planner – I am usually making plans and organizing hangouts",
+        "An Adventurer – Always up for trying new experiences and things",
+        "A Social butterfly – I enjoy large gatherings and being with lots of people",
+        "Experts, social media and online communities",
+        "A Deep Thinker – I prefer meaningful and intimate conversations and interactions",
+        "A Listener – Friends come to me for advice and support"
+      ]
+    },
+    {
+      "id": 8,
+      "sequence_order": 8,
+      "category": "multiple_choice",
+      "type": "single_select",
+      "question": "When trying something new, I prefer:",
+      "options": [
+        "Guided instruction from an expert",
+        "Figuring it out with fellow beginners"
+      ]
+    },
+    {
+      "id": 9,
+      "sequence_order": 9,
+      "category": "multiple_choice",
+      "type": "single_select",
+      "question": "When I’m feeling stressed, I’m most likely to",
+      "options": [
+        "Get moving (workout, walk, dance)",
+        "Get still (meditate, read, breathe)",
+        "Talk to a friend",
+        "Go out with friends"
+      ]
+    },
+    {
+      "id": 10,
+      "sequence_order": 10,
+      "category": "multiple_choice",
+      "type": "single_select",
+      "question": "When it comes to wellness practices, I am",
+      "options": [
+        "Already committed to regular wellness activities",
+        "Curious but haven't found the right fit yet",
+        "Open to trying wellness activities with the right people",
+        "More interested in social connections than wellness specifically"
+      ]
+    },
+    {
+      "id": 11,
+      "sequence_order": 11,
+      "category": "multiple_choice",
+      "type": "chip_multiselect",
+      "question": "I'd love to be a part of these activities:",
+      "options": [
+        "Yoga or movement class",
+        "fitness session",
+        "Nature hike or walk",
+        "Healthy cooking class",
+        "Coffee/matcha chats",
+        "Singing",
+        "Vlogging",
+        "Sip & Paint",
+        "Dancing",
+        "Art or creative workshop"
+      ]
+    },
+    {
+      "id": 12,
+      "sequence_order": 12,
+      "category": "multiple_choice",
+      "type": "single_select",
+      "question": "When it comes to wellness practices, I am",
+      "note": "The question title in the UI appears identical to ID 10, but options suggest a preference for social connection dynamics.",
+      "options": [
+        "Share my specific interests",
+        "Are at a similar life stage",
+        "Match my energy level",
+        "Challenge my perspectives",
+        "Value consistency and showing up"
+      ]
+    },
+    {
+      "id": 13,
+      "sequence_order": 13,
+      "category": "range",
+      "type": "vertical_scroll_scale",
+      "question": "How comfortable are you with: Deep conversations with new people",
+      "config": {
+        "min": 1,
+        "max": 10,
+        "low_label": "1 being the lowest",
+        "high_label": "10 being the highest"
+      }
+    },
+    {
+      "id": 14,
+      "sequence_order": 14,
+      "category": "range",
+      "type": "vertical_scroll_scale",
+      "question": "How crucial is it for your connections to have the same interests as you?",
+      "config": {
+        "min": 1,
+        "max": 10,
+        "low_label": "1 being the lowest",
+        "high_label": "10 being the highest"
+      }
+    },
+    {
+      "id": 15,
+      "sequence_order": 15,
+      "category": "range",
+      "type": "vertical_scroll_scale",
+      "question": "How crucial is it for those you engage with to challenge your viewpoints",
+      "config": {
+        "min": 1,
+        "max": 10,
+        "low_label": "1 being the lowest",
+        "high_label": "10 being the highest"
+      }
+    },
+    {
+      "id": 16,
+      "sequence_order": 16,
+      "category": "range",
+      "type": "vertical_scroll_scale",
+      "question": "Rate how true this statement is for you: I am self-motivated and driven",
+      "config": {
+        "min": 1,
+        "max": 10,
+        "low_label": "1 being the lowest",
+        "high_label": "10 being the highest"
+      }
+    },
+    {
+      "id": 17,
+      "sequence_order": 17,
+      "category": "range",
+      "type": "vertical_scroll_scale",
+      "question": "Rate your enjoyment of politically incorrect humor",
+      "config": {
+        "min": 1,
+        "max": 10,
+        "low_label": "1 being the lowest",
+        "high_label": "10 being the highest"
+      }
+    },
+    {
+      "id": 18,
+      "sequence_order": 18,
+      "category": "range",
+      "type": "vertical_scroll_scale",
+      "question": "How satisfied are you with your career/job?",
+      "config": {
+        "min": 1,
+        "max": 10,
+        "low_label": "1 being the lowest",
+        "high_label": "10 being the highest"
+      }
+    },
+    {
+      "id": 19,
+      "sequence_order": 19,
+      "category": "range",
+      "type": "vertical_scroll_scale",
+      "question": "How important is humour to you?",
+      "config": {
+        "min": 1,
+        "max": 10,
+        "low_label": "1 being the lowest",
+        "high_label": "10 being the highest"
+      }
+    },
+    {
+      "id": 20,
+      "sequence_order": 20,
+      "category": "range",
+      "type": "vertical_scroll_scale",
+      "question": "How important is family to you?",
+      "config": {
+        "min": 1,
+        "max": 10,
+        "low_label": "1 being the lowest",
+        "high_label": "10 being the highest"
+      }
+    },
+    {
+      "id": 21,
+      "sequence_order": 21,
+      "category": "range",
+      "type": "vertical_scroll_scale",
+      "question": "How important is spirituality to you?",
+      "config": {
+        "min": 1,
+        "max": 10,
+        "low_label": "1 being the lowest",
+        "high_label": "10 being the highest"
+      }
+    },
+    {
+      "id": 22,
+      "sequence_order": 22,
+      "category": "multiple_choice",
+      "type": "single_select",
+      "question": "For group experiences, I prefer groups of:",
+      "options": [
+        "Intimate (2-4 people)",
+        "Small (5-8 people)",
+        "Medium (8-15 people)"
+      ]
+    },
+    {
+      "id": 23,
+      "sequence_order": 23,
+      "category": "multiple_choice",
+      "type": "chip_multiselect",
+      "question": "I'm looking to connect with people who are: (select up to 3)",
+      "config": {
+        "max_selection": 3
+      },
+      "options": [
+        "Growth-oriented",
+        "Consistent and reliable",
+        "Open-minded to different approaches",
+        "Fun and don't take themselves too seriously",
+        "Thoughtful and reflective",
+        "Energetic and enthusiastic"
+      ]
+    },
+    {
+      "id": 24,
+      "sequence_order": 24,
+      "category": "multiple_choice",
+      "type": "chip_multiselect",
+      "question": "A conversation I'd love to join in on (select only 2 please)",
+      "config": {
+        "max_selection": 2
+      },
+      "options": [
+        "The unintended consequences of Gen AI are we ready for what's coming?",
+        "Personal growth through travel, books, and new experiences",
+        "Finding balance between ambition & well-being",
+        "Rethinking social norms & modern relationships"
+      ]
+    },
+    {
+      "id": 25,
+      "sequence_order": 25,
+      "category": "text_input",
+      "type": "text_area",
+      "question": "What does your ideal Sunday look like? (under 20 words)",
+      "placeholder": "On Sundays I'd love to...."
+    },
+    {
+      "id": 26,
+      "sequence_order": 26,
+      "category": "multiple_choice",
+      "type": "chip_multiselect",
+      "question": "I'm typically available for connections (please only select 2!)",
+      "config": {
+        "max_selection": 2
+      },
+      "options": [
+        "Weekday mornings",
+        "Weekday lunchtimes",
+        "Weekday evenings",
+        "Weekend mornings",
+        "Weekend afternoons",
+        "Weekend evenings"
+      ]
+    },
+    {
+      "id": 27,
+      "sequence_order": 27,
+      "category": "multiple_choice",
+      "type": "single_select",
+      "question": "Languages I'm comfortable conversing in:",
+      "options": [
+        "English",
+        "Hindi",
+        "Both",
+        "Other"
+      ]
+    },
+    {
+      "id": 28,
+      "sequence_order": 28,
+      "category": "multiple_choice",
+      "type": "single_select",
+      "question": "For a group experience, my budget comfort zone is:",
+      "options": [
+        "INR 1000-2000",
+        "INR 2000-3500",
+        "INR 3500+"
+      ]
+    },
+    {
+      "id": 29,
+      "sequence_order": 29,
+      "category": "multiple_choice",
+      "type": "single_select",
+      "question": "How far in advance do you prefer to plan?",
+      "options": [
+        "1+ weeks",
+        "3-6 days",
+        "1-2 days",
+        "Same day is fine"
+      ]
+    },
+    {
+      "id": 30,
+      "sequence_order": 30,
+      "category": "multiple_choice",
+      "type": "single_select_with_input",
+      "question": "Lastly, help us know how you heard about us!",
+      "options": [
+        "Got invited",
+        "Got referred by an existing member"
+      ],
+      "conditional_input": {
+        "trigger_option": "Got referred by an existing member",
+        "label": "if referred - please mention the name below!",
+        "placeholder": "On Sundays I'd love to...."
+      }
+    },
+    {
+      "id": 31,
+      "sequence_order": 31,
+      "category": "text_input",
+      "type": "text_area",
+      "question": "Anything else you'd like potential connections to know?",
+      "placeholder": "On Sundays I'd love to...."
+    }
+  ]
+}
