@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../utils/colors.dart';
-import '../widgets/kin_logo.dart';
+import '../../utils/colors.dart';
+import '../../widgets/kin_logo.dart';
 
 class GetToKnowYouScreen extends StatelessWidget {
   const GetToKnowYouScreen({super.key});

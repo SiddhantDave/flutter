@@ -1,63 +1,32 @@
 import 'package:flutter/material.dart';
-import '../utils/colors.dart';
+import '../../utils/colors.dart';
 
-class QuizAgeRangeScreen extends StatefulWidget {
-  const QuizAgeRangeScreen({super.key});
+class QuizActivitiesScreen extends StatefulWidget {
+  const QuizActivitiesScreen({super.key});
 
   @override
-  State<QuizAgeRangeScreen> createState() => _QuizAgeRangeScreenState();
+  State<QuizActivitiesScreen> createState() => _QuizActivitiesScreenState();
 }
 
-class _QuizAgeRangeScreenState extends State<QuizAgeRangeScreen> {
+class _QuizActivitiesScreenState extends State<QuizActivitiesScreen> {
   int currentQuestion = 1;
   int totalQuestions = 10;
-  
-  late FixedExtentScrollController _scrollController;
-  int selectedIndex = 3; // Default to 35-40
+  Set<String> selectedActivities = {'Yoga or movement class'};
 
   double get progress => currentQuestion / totalQuestions;
 
-  final List<String> ageRanges = [
-    '13-18',
-    '18-24',
-    '25-34',
-    '35-40',
-    '41-46',
-    '47-52',
-    '53-60',
-    '61-70',
-    '71-80',
-    '81-90',
-    '91-100',
-    '100+',
+  final List<Map<String, dynamic>> activities = [
+    {'name': 'Yoga or movement class', 'icon': Icons.self_improvement},
+    {'name': 'fitness session', 'icon': Icons.fitness_center},
+    {'name': 'Nature hike or walk', 'icon': Icons.nature_people},
+    {'name': 'Healthy cooking class', 'icon': Icons.restaurant},
+    {'name': 'Coffee/matcha chats', 'icon': Icons.coffee},
+    {'name': 'Singing', 'icon': Icons.mic},
+    {'name': 'Vlogging', 'icon': Icons.videocam},
+    {'name': 'Sip & Paint', 'icon': Icons.brush},
+    {'name': 'Dancing', 'icon': Icons.music_note},
+    {'name': 'Art or creative workshop', 'icon': Icons.palette},
   ];
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController = FixedExtentScrollController(initialItem: selectedIndex);
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  double getScale(int index, int centerIndex) {
-    final distance = (index - centerIndex).abs();
-    if (distance == 0) return 1.0;
-    if (distance == 1) return 0.7;
-    if (distance == 2) return 0.5;
-    return 0.35;
-  }
-
-  Color getColor(int index, int centerIndex) {
-    final distance = (index - centerIndex).abs();
-    if (distance == 0) return const Color(0xFFE67E22);
-    if (distance == 1) return const Color(0xFF4A4A4A);
-    return const Color(0xFFD9D9D9);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +119,7 @@ class _QuizAgeRangeScreenState extends State<QuizAgeRangeScreen> {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 40),
             child: Text(
-              'I fall under the age range of',
+              'I\'d love to be a part of these activities:',
               style: TextStyle(
                 fontFamily: 'SF Pro Display',
                 fontSize: 16,
@@ -162,57 +131,82 @@ class _QuizAgeRangeScreenState extends State<QuizAgeRangeScreen> {
             ),
           ),
           const SizedBox(height: 24),
-          // Top emoji
-          const Text(
-            '👦🏻',
-            style: TextStyle(fontSize: 40),
-          ),
-          const SizedBox(height: 20),
-          // Wheel picker
+          // Activity chips
           Expanded(
-            child: ListWheelScrollView.useDelegate(
-              controller: _scrollController,
-              itemExtent: 60,
-              diameterRatio: 3.5, // Increased from 2.5 to make it even flatter
-              physics: const FixedExtentScrollPhysics(),
-              onSelectedItemChanged: (index) {
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
-              childDelegate: ListWheelChildBuilderDelegate(
-                childCount: ageRanges.length,
-                builder: (context, index) {
-                  final scale = getScale(index, selectedIndex);
-                  final color = getColor(index, selectedIndex);
-                  
-                  return Center(
-                    child: Transform.scale(
-                      scale: scale,
-                      child: Text(
-                        ageRanges[index],
-                        style: TextStyle(
-                          fontFamily: 'SF Pro Display',
-                          fontSize: 42,
-                          fontWeight: FontWeight.w500, // Changed from w600 to w500
-                          color: color,
-                          letterSpacing: -0.5,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
+            child: SingleChildScrollView(
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 400),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Wrap(
+                      spacing: 10,
+                      runSpacing: 14,
+                      alignment: WrapAlignment.center,
+                      children: activities.map((activity) {
+                        final isSelected = selectedActivities.contains(activity['name']);
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              if (isSelected) {
+                                selectedActivities.remove(activity['name']);
+                              } else {
+                                selectedActivities.add(activity['name']);
+                              }
+                            });
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 18,
+                              vertical: 11,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isSelected ? AppColors.primary : Colors.transparent,
+                              borderRadius: BorderRadius.circular(22),
+                              border: Border.all(
+                                color: AppColors.primary,
+                                width: 1.5,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  activity['icon'],
+                                  size: 18,
+                                  color: isSelected
+                                      ? AppColors.white
+                                      : AppColors.primary,
+                                ),
+                                const SizedBox(width: 7),
+                                Flexible(
+                                  child: Text(
+                                    activity['name'],
+                                    style: TextStyle(
+                                      fontFamily: 'SF Pro Display',
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: isSelected
+                                          ? AppColors.white
+                                          : AppColors.primary,
+                                      height: 1.3,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.visible,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }).toList(),
                     ),
-                  );
-                },
+                  ),
+                ),
               ),
             ),
           ),
-          // Bottom emoji
-          const SizedBox(height: 20),
-          const Text(
-            '👴🏻',
-            style: TextStyle(fontSize: 40),
-          ),
-          const SizedBox(height: 16),
           // Bottom buttons
           Padding(
             padding: const EdgeInsets.all(20),
@@ -240,7 +234,7 @@ class _QuizAgeRangeScreenState extends State<QuizAgeRangeScreen> {
                     height: 52,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/quiz-activities');
+                        Navigator.pushNamed(context, '/quiz-conversation');
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,

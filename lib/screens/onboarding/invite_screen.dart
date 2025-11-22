@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../utils/colors.dart';
-import '../widgets/curved_header.dart';
-import '../widgets/kin_logo.dart';
+import '../../utils/colors.dart';
+import '../../widgets/curved_header.dart';
+import '../../widgets/kin_logo.dart';
 
 class InviteScreen extends StatelessWidget {
   const InviteScreen({super.key});

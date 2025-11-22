@@ -1,26 +1,63 @@
 import 'package:flutter/material.dart';
-import '../utils/colors.dart';
+import '../../utils/colors.dart';
 
-class QuizMultipleChoiceScreen extends StatefulWidget {
-  const QuizMultipleChoiceScreen({super.key});
+class QuizAgeRangeScreen extends StatefulWidget {
+  const QuizAgeRangeScreen({super.key});
 
   @override
-  State<QuizMultipleChoiceScreen> createState() => _QuizMultipleChoiceScreenState();
+  State<QuizAgeRangeScreen> createState() => _QuizAgeRangeScreenState();
 }
 
-class _QuizMultipleChoiceScreenState extends State<QuizMultipleChoiceScreen> {
+class _QuizAgeRangeScreenState extends State<QuizAgeRangeScreen> {
   int currentQuestion = 1;
   int totalQuestions = 10;
-  String? selectedOption;
+  
+  late FixedExtentScrollController _scrollController;
+  int selectedIndex = 3; // Default to 35-40
 
   double get progress => currentQuestion / totalQuestions;
 
-  final List<Map<String, String>> options = [
-    {'label': 'A', 'text': 'Male'},
-    {'label': 'B', 'text': 'Female'},
-    {'label': 'C', 'text': 'Non-Binary'},
-    {'label': 'D', 'text': 'Prefer not to say'},
+  final List<String> ageRanges = [
+    '13-18',
+    '18-24',
+    '25-34',
+    '35-40',
+    '41-46',
+    '47-52',
+    '53-60',
+    '61-70',
+    '71-80',
+    '81-90',
+    '91-100',
+    '100+',
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = FixedExtentScrollController(initialItem: selectedIndex);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  double getScale(int index, int centerIndex) {
+    final distance = (index - centerIndex).abs();
+    if (distance == 0) return 1.0;
+    if (distance == 1) return 0.7;
+    if (distance == 2) return 0.5;
+    return 0.35;
+  }
+
+  Color getColor(int index, int centerIndex) {
+    final distance = (index - centerIndex).abs();
+    if (distance == 0) return const Color(0xFFE67E22);
+    if (distance == 1) return const Color(0xFF4A4A4A);
+    return const Color(0xFFD9D9D9);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +66,7 @@ class _QuizMultipleChoiceScreenState extends State<QuizMultipleChoiceScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.background,
         elevation: 0,
+        scrolledUnderElevation: 0,
         leading: GestureDetector(
           onTap: () => Navigator.pop(context),
           child: Container(
@@ -107,99 +145,74 @@ class _QuizMultipleChoiceScreenState extends State<QuizMultipleChoiceScreen> {
               ],
             ),
           ),
-          const SizedBox(height: 40),
-          // Question content
+          const SizedBox(height: 20),
+          // Question text
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 40),
+            child: Text(
+              'I fall under the age range of',
+              style: TextStyle(
+                fontFamily: 'SF Pro Display',
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFF333333),
+                height: 1.19,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(height: 24),
+          // Top emoji
+          const Text(
+            '👦🏻',
+            style: TextStyle(fontSize: 40),
+          ),
+          const SizedBox(height: 20),
+          // Wheel picker
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: Column(
-                children: [
-                  const Text(
-                    'I identify as',
-                    style: TextStyle(
-                      fontFamily: 'SF Pro Display',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xFF333333),
-                      height: 1.19,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 24),
-                  ...options.map((option) => Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedOption = option['label'];
-                        });
-                      },
-                      child: Container(
-                        height: 56,
-                        decoration: selectedOption == option['label']
-                            ? BoxDecoration(
-                                color: const Color(0xFFF5F8F0),
-                                borderRadius: BorderRadius.circular(11.24),
-                                border: const Border(
-                                  top: BorderSide(color: AppColors.primary, width: 1.5),
-                                  bottom: BorderSide(color: AppColors.primary, width: 3.5),
-                                  left: BorderSide(color: AppColors.primary, width: 2.5),
-                                  right: BorderSide(color: AppColors.primary, width: 2.5),
-                                ),
-                              )
-                            : BoxDecoration(
-                                color: AppColors.white,
-                                borderRadius: BorderRadius.circular(11.24),
-                                border: Border.all(
-                                  color: AppColors.primary,
-                                  width: 1.124,
-                                ),
-                              ),
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 32,
-                              height: 32,
-                              decoration: BoxDecoration(
-                                color: selectedOption == option['label']
-                                    ? AppColors.primary
-                                    : const Color(0xFFD9D9D9),
-                                shape: BoxShape.circle,
-                              ),
-                              alignment: Alignment.center,
-                              child: Text(
-                                option['label']!,
-                                style: TextStyle(
-                                  fontFamily: 'SF Pro Display',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: selectedOption == option['label']
-                                      ? AppColors.white
-                                      : const Color(0xFF666666),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                            Text(
-                              option['text']!,
-                              style: const TextStyle(
-                                fontFamily: 'SF Pro Display',
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.primary,
-                              ),
-                            ),
-                          ],
+            child: ListWheelScrollView.useDelegate(
+              controller: _scrollController,
+              itemExtent: 60,
+              diameterRatio: 3.5, // Increased from 2.5 to make it even flatter
+              physics: const FixedExtentScrollPhysics(),
+              onSelectedItemChanged: (index) {
+                setState(() {
+                  selectedIndex = index;
+                });
+              },
+              childDelegate: ListWheelChildBuilderDelegate(
+                childCount: ageRanges.length,
+                builder: (context, index) {
+                  final scale = getScale(index, selectedIndex);
+                  final color = getColor(index, selectedIndex);
+                  
+                  return Center(
+                    child: Transform.scale(
+                      scale: scale,
+                      child: Text(
+                        ageRanges[index],
+                        style: TextStyle(
+                          fontFamily: 'SF Pro Display',
+                          fontSize: 42,
+                          fontWeight: FontWeight.w500, // Changed from w600 to w500
+                          color: color,
+                          letterSpacing: -0.5,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
-                  )).toList(),
-                  const Spacer(),
-                ],
+                  );
+                },
               ),
             ),
           ),
+          // Bottom emoji
+          const SizedBox(height: 20),
+          const Text(
+            '👴🏻',
+            style: TextStyle(fontSize: 40),
+          ),
+          const SizedBox(height: 16),
           // Bottom buttons
           Padding(
             padding: const EdgeInsets.all(20),
@@ -227,7 +240,7 @@ class _QuizMultipleChoiceScreenState extends State<QuizMultipleChoiceScreen> {
                     height: 52,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/quiz-age-range');
+                        Navigator.pushNamed(context, '/quiz-activities');
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,

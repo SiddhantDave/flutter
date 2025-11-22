@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'kin_logo.dart';
 
 class CurvedHeader extends StatelessWidget {
   final double height;

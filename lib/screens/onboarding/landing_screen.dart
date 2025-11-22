@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../utils/colors.dart';
-import '../widgets/curved_header.dart';
-import '../widgets/kin_logo.dart';
+import '../../widgets/curved_header.dart';
+import '../../widgets/kin_logo.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});

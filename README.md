@@ -1,16 +1,11 @@
-# my_app
+In ./kin folder there is a complete app in the React Native.
+This is optimised for pixel perfect view 
 
-A new Flutter project.
+We need to replicate that app in flutter.
 
-## Getting Started
+You should copy any styles available in the kin app and replicate them in flutter. as well as you can steal any images and asset from native as well
 
-This project is a starting point for a Flutter application.
+if a figma link is provided, use the figma mcp to get the data possible and also images if possible to download or view.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+any new page if you build, add it to the router file as well,
+also keep the code organized and well structured and files should be arranged professionally.

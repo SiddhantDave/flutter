@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../utils/colors.dart';
-import '../widgets/curved_header.dart';
-import '../widgets/kin_logo.dart';
+import '../../utils/colors.dart';
+import '../../widgets/curved_header.dart';
+import '../../widgets/kin_logo.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
