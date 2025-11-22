@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'my_bookings_page.dart';
 
 class DevRouterScreen extends StatelessWidget {
   const DevRouterScreen({super.key});
@@ -139,6 +140,33 @@ class DevRouterScreen extends StatelessWidget {
                 route: '/event-listing',
                 icon: Icons.list,
                 color: Colors.orange,
+              ),
+              _buildScreenCard(
+                context,
+                title: 'My Bookings Page',
+                description: 'User bookings list',
+                route: '/my-bookings',
+                icon: Icons.bookmark,
+                color: Colors.teal,
+              ),
+              const SizedBox(height: 24),
+              _buildSectionHeader('Profile Screens'),
+              const SizedBox(height: 12),
+              _buildScreenCard(
+                context,
+                title: 'Profile Screen',
+                description: 'User profile and settings',
+                route: '/profile',
+                icon: Icons.person_outline,
+                color: Colors.purple,
+              ),
+              _buildScreenCard(
+                context,
+                title: 'Profile Details',
+                description: 'Edit profile details',
+                route: '/profile-details',
+                icon: Icons.edit,
+                color: Colors.pink,
               ),
               const SizedBox(height: 24),
             ],

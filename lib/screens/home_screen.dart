@@ -6,6 +6,7 @@ import '../widgets/event_card.dart';
 import '../widgets/explore_card.dart';
 import '../widgets/page_indicator.dart';
 import '../widgets/bottom_nav_bar.dart';
+import 'event_details/event_details_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -84,6 +85,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     tags: event.tags,
                     attendeesCount: event.attendeesCount,
                     attendeeAvatars: event.attendeeAvatars,
+                    onPress: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EventDetailsPage(event: event),
+                        ),
+                      );
+                    },
                   );
                 },
               ),

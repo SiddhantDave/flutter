@@ -28,115 +28,133 @@ class EventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPress,
-      child: Container(
-        width: double.infinity,
-        height: 182,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: AppColors.mutedForeground, width: 1),
-          image: DecorationImage(
-            image: AssetImage(backgroundImage),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Stack(
-          children: [
-            // Tags
-            Positioned(
-              top: 10,
-              left: 10,
-              child: Row(
-                children: tags.map((tag) => Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: EventCardTag(tag: tag),
-                )).toList(),
-              ),
+      child: Hero(
+        tag: title,
+        child: Container(
+          width: double.infinity,
+          height: 182,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: AppColors.mutedForeground, width: 1),
+            image: DecorationImage(
+              image: AssetImage(backgroundImage),
+              fit: BoxFit.cover,
             ),
-
-            // Bottom Section
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                padding: const EdgeInsets.all(11),
+          ),
+          child: Stack(
+            children: [
+              // Tags
+              Positioned(
+                top: 10,
+                left: 10,
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Left Section
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          title,
-                          style: const TextStyle(
-                            fontFamily: 'SF Pro Display',
-                            fontWeight: FontWeight.w700, // Bold
-                            fontSize: 15,
-                            color: AppColors.white,
-                            height: 1.2, // 18/15
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Time- $time',
-                              style: const TextStyle(
-                                fontFamily: 'SF Pro Display',
-                                fontWeight: FontWeight.w400, // Regular
-                                fontSize: 8,
-                                color: AppColors.white,
-                                height: 1.25, // 10/8
-                              ),
-                            ),
-                            Text(
-                              'Venue- $venue',
-                              style: const TextStyle(
-                                fontFamily: 'SF Pro Display',
-                                fontWeight: FontWeight.w400, // Regular
-                                fontSize: 8,
-                                color: AppColors.white,
-                                height: 1.25, // 10/8
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                  children: tags.map((tag) => Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Material( // Material needed for Hero text/content to not look weird during flight if any
+                      color: Colors.transparent,
+                      child: EventCardTag(tag: tag),
                     ),
-
-                    // Right Section (Attendees)
-                    Row(
-                      children: [
-                        // Avatars
-                        SizedBox(
-                          width: _calculateAvatarsWidth(),
-                          height: 13,
-                          child: Stack(
-                            children: _buildAvatars(),
-                          ),
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          '$attendeesCount+ Attending',
-                          style: const TextStyle(
-                            color: AppColors.white,
-                            fontFamily: 'SF Pro Display',
-                            fontWeight: FontWeight.w400, // Regular
-                            fontSize: 8,
-                            letterSpacing: 0.16,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                  )).toList(),
                 ),
               ),
-            ),
-          ],
+
+              // Bottom Section
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: const EdgeInsets.all(11),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Left Section
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Material(
+                            color: Colors.transparent,
+                            child: Text(
+                              title,
+                              style: const TextStyle(
+                                fontFamily: 'SF Pro Display',
+                                fontWeight: FontWeight.w700, // Bold
+                                fontSize: 15,
+                                color: AppColors.white,
+                                height: 1.2, // 18/15
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Material(
+                                color: Colors.transparent,
+                                child: Text(
+                                  'Time- $time',
+                                  style: const TextStyle(
+                                    fontFamily: 'SF Pro Display',
+                                    fontWeight: FontWeight.w400, // Regular
+                                    fontSize: 8,
+                                    color: AppColors.white,
+                                    height: 1.25, // 10/8
+                                  ),
+                                ),
+                              ),
+                              Material(
+                                color: Colors.transparent,
+                                child: Text(
+                                  'Venue- $venue',
+                                  style: const TextStyle(
+                                    fontFamily: 'SF Pro Display',
+                                    fontWeight: FontWeight.w400, // Regular
+                                    fontSize: 8,
+                                    color: AppColors.white,
+                                    height: 1.25, // 10/8
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+
+                      // Right Section (Attendees)
+                      Row(
+                        children: [
+                          // Avatars
+                          SizedBox(
+                            width: _calculateAvatarsWidth(),
+                            height: 13,
+                            child: Stack(
+                              children: _buildAvatars(),
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          Material(
+                            color: Colors.transparent,
+                            child: Text(
+                              '$attendeesCount+ Attending',
+                              style: const TextStyle(
+                                color: AppColors.white,
+                                fontFamily: 'SF Pro Display',
+                                fontWeight: FontWeight.w400, // Regular
+                                fontSize: 8,
+                                letterSpacing: 0.16,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

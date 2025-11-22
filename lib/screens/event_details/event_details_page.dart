@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import '../../utils/colors.dart';
+import '../../utils/events_data.dart';
+import '../../widgets/bottom_nav_bar.dart';
 
 class EventDetailsPage extends StatelessWidget {
-  const EventDetailsPage({super.key});
+  final EventData event;
+
+  const EventDetailsPage({
+    super.key,
+    required this.event,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,34 +27,38 @@ class EventDetailsPage extends StatelessWidget {
                   // Event Image
                   Stack(
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(24),
-                        child: Image.asset(
-                          'assets/temp/event-image.jpg',
-                          width: double.infinity,
-                          height: 250,
-                          fit: BoxFit.cover,
+                      Hero(
+                        tag: event.title, // Using title as tag for uniqueness in this context
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(24),
+                          child: Image.asset(
+                            event.backgroundImage,
+                            width: double.infinity,
+                            height: 250,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                      Positioned(
-                        top: 16,
-                        left: 16,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.8),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: const Text(
-                            'Wellness',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black,
+                      if (event.tags.isNotEmpty)
+                        Positioned(
+                          top: 16,
+                          left: 16,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.8),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              event.tags.first,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
                         ),
-                      ),
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -69,9 +80,9 @@ class EventDetailsPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   // Title
-                  const Text(
-                    'Wellness event by Kin',
-                    style: TextStyle(
+                  Text(
+                    event.title,
+                    style: const TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -88,15 +99,15 @@ class EventDetailsPage extends StatelessWidget {
                         height: 24,
                         child: Stack(
                           children: [
-                            _buildAvatar('assets/temp/Frame 1321315995.png', 0),
-                            _buildAvatar('assets/temp/Frame 1321315996.png', 16),
-                            _buildAvatar('assets/temp/Frame 1321315997.png', 32),
+                            if (event.attendeeAvatars.isNotEmpty) _buildAvatar(event.attendeeAvatars[0], 0),
+                            if (event.attendeeAvatars.length > 1) _buildAvatar(event.attendeeAvatars[1], 16),
+                            if (event.attendeeAvatars.length > 2) _buildAvatar(event.attendeeAvatars[2], 32),
                           ],
                         ),
                       ),
-                      const Text(
-                        '50+ Attending',
-                        style: TextStyle(
+                      Text(
+                        '${event.attendeesCount}+ Attending',
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color: Colors.black,
@@ -108,8 +119,8 @@ class EventDetailsPage extends StatelessWidget {
                   // Date
                   _buildInfoRow(
                     icon: Icons.calendar_today_outlined,
-                    title: 'Sunday 1 June',
-                    subtitle: '09:00 am - 11:00 am IST',
+                    title: 'Sunday 1 June', // Placeholder as date parsing is not implemented
+                    subtitle: event.time,
                     isDate: true,
                   ),
                   const SizedBox(height: 20),
@@ -117,7 +128,7 @@ class EventDetailsPage extends StatelessWidget {
                   _buildInfoRow(
                     icon: Icons.person_outline,
                     title: 'In Person',
-                    subtitle: 'Venue: Mumbai, India',
+                    subtitle: 'Venue: ${event.venue}',
                   ),
                   const SizedBox(height: 24),
                   // Registration Card
@@ -268,20 +279,14 @@ class EventDetailsPage extends StatelessWidget {
               bottom: 0,
               left: 0,
               right: 0,
-              child: Container(
-                padding: const EdgeInsets.only(top: 20, bottom: 30, left: 30, right: 30),
-                decoration: const BoxDecoration(
-                  color: AppColors.primary,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _buildNavItem(Icons.home_outlined, 'HOME', true),
-                    _buildNavItem(Icons.favorite_border, '', false),
-                    _buildNavItem(Icons.confirmation_number_outlined, '', false),
-                    _buildNavItem(Icons.person_outline, '', false),
-                  ],
-                ),
+              child: BottomNavBar(
+                currentIndex: 0, // Default to Home or make it configurable
+                onTap: (index) {
+                  // Handle navigation if needed, or just pop back to home
+                  if (index == 0) {
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                  }
+                },
               ),
             ),
           ],
@@ -363,26 +368,6 @@ class EventDetailsPage extends StatelessWidget {
             ),
           ],
         ),
-      ],
-    );
-  }
-
-  Widget _buildNavItem(IconData icon, String label, bool isSelected) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, color: AppColors.white, size: 24),
-        if (isSelected) ...[
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: const TextStyle(
-              color: AppColors.white,
-              fontSize: 10,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
       ],
     );
   }

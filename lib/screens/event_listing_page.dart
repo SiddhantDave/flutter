@@ -4,6 +4,8 @@ import '../utils/events_data.dart';
 import '../widgets/event_card.dart';
 import '../widgets/filter_row.dart';
 import '../widgets/search_bar.dart';
+import '../widgets/bottom_nav_bar.dart';
+import 'event_details/event_details_page.dart';
 
 class EventListingPage extends StatefulWidget {
   const EventListingPage({super.key});
@@ -14,6 +16,7 @@ class EventListingPage extends StatefulWidget {
 
 class _EventListingPageState extends State<EventListingPage> with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  int _currentNavIndex = 0;
 
   @override
   void initState() {
@@ -99,6 +102,17 @@ class _EventListingPageState extends State<EventListingPage> with SingleTickerPr
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: _currentNavIndex,
+        onTap: (index) {
+          setState(() {
+            _currentNavIndex = index;
+          });
+          if (index == 0) {
+            Navigator.popUntil(context, (route) => route.isFirst);
+          }
+        },
+      ),
     );
   }
 
@@ -118,7 +132,12 @@ class _EventListingPageState extends State<EventListingPage> with SingleTickerPr
           attendeesCount: event.attendeesCount,
           attendeeAvatars: event.attendeeAvatars,
           onPress: () {
-            // Handle press
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EventDetailsPage(event: event),
+              ),
+            );
           },
         );
       },

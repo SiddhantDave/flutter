@@ -73,20 +73,26 @@ class BottomNavBar extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              icon,
-              color: isActive ? AppColors.primaryLight : AppColors.white,
-              size: 24,
+            AnimatedScale(
+              scale: isActive ? 1.2 : 1.0,
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              child: Icon(
+                icon,
+                color: isActive ? AppColors.primaryLight : AppColors.white,
+                size: 24,
+              ),
             ),
             const SizedBox(height: 4),
-            Text(
-              label,
+            AnimatedDefaultTextStyle(
+              duration: const Duration(milliseconds: 200),
               style: TextStyle(
                 fontFamily: 'SF Pro Display',
                 fontWeight: FontWeight.w500,
                 fontSize: 10,
                 color: isActive ? AppColors.primaryLight : AppColors.white,
               ),
+              child: Text(label),
             ),
           ],
         ),
