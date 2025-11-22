@@ -124,3 +124,46 @@ final List<EventData> events = [
     ],
   ),
 ];
+
+// Sample events for event details page routing
+final List<EventData> sampleEvents = [
+  EventData(
+    backgroundImage: 'assets/temp/event-image.jpg',
+    title: 'Flutter Workshop',
+    time: '10:00 AM',
+    venue: 'Tech Hub, Bangalore',
+    tags: ['Tech', 'Learning'],
+    attendeesCount: 50,
+    attendeeAvatars: [
+      'assets/temp/Frame 1321315995.png',
+      'assets/temp/Frame 1321315996.png',
+      'assets/temp/Frame 1321315997.png',
+    ],
+  ),
+  EventData(
+    backgroundImage: 'assets/temp/kin-events-bg.png',
+    title: 'AI & ML Conference',
+    time: '09:30 AM',
+    venue: 'Convention Center, Mumbai',
+    tags: ['Tech', 'AI'],
+    attendeesCount: 200,
+    attendeeAvatars: [
+      'assets/temp/Frame 1321315995.png',
+      'assets/temp/Frame 1321315996.png',
+      'assets/temp/Frame 1321315997.png',
+    ],
+  ),
+  EventData(
+    backgroundImage: 'assets/temp/kin-classes-bg1.png',
+    title: 'Startup Pitch Night',
+    time: '06:00 PM',
+    venue: 'Co-Working Space, Delhi',
+    tags: ['Business', 'Networking'],
+    attendeesCount: 75,
+    attendeeAvatars: [
+      'assets/temp/Frame 1321315995.png',
+      'assets/temp/Frame 1321315996.png',
+      'assets/temp/Frame 1321315997.png',
+    ],
+  ),
+];
